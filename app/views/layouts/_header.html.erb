@@ -1,0 +1,41 @@
+<header class="sticky-top shadow-sm">
+ <nav class="navbar navbar-expand-lg">
+    <a class="navbar-brand" href="/"><%= image_tag "logo.jpeg", size:"120" %></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+  <ul class="navbar-nav ml-auto">
+      <% if customer_signed_in? %>
+        <span class="text-center">Welcome to<strong><%= current_customer.full_name %> 様 !</strong></span>
+      <% end %>
+      <ul class="headline navbar-nav ml-auto">
+        <% if admin_signed_in? %>
+          <li><%= link_to "商品一覧", admin_items_path, class: "nav-link text-light" %></li>
+          <li><%= link_to "会員一覧", admin_customers_path, class: "nav-link text-light" %></li>
+          <li><%= link_to "注文履歴一覧", admin_root_path, class: "nav-link text-light" %></li>
+          <li><%= link_to "ジャンル一覧", admin_genres_path, class: "nav-link text-light" %></li>
+          <li><%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "nav-link text-light" %></li>
+          <li class="my-auto search_form">
+            <%= form_with url: admin_search_path, method: :get, local: true do |f| %>
+              <%= f.text_field :keyword, class: "search_form_text" %>
+              <%= f.button :type => "submit", class: "search_form_btn py-auto" do %>
+                <i class="fas fa-search"></i>
+              <% end %>
+            <% end %>
+          </li>
+        <% elsif customer_signed_in? %>
+          <li><%= link_to "マイページ", mypage_path, class: "nav-link text-light" %></li>
+          <li><%= link_to "商品", items_path, class: "nav-link text-light" %></li>
+          <li><%= link_to "カート", cart_items_path, class: "nav-link text-light" %></li>
+          <li><%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class: "nav-link text-light" %></li>
+        <% else %>
+          <li><%= link_to "About", about_path, class: "nav-link text-light" %></li>
+          <li><%= link_to "商品", items_path, class: "nav-link text-light" %></li>
+          <li><%= link_to "新規登録", new_customer_registration_path, class: "nav-link text-light" %></li>
+          <li><%= link_to "ログイン", new_customer_session_path, class: "nav-link text-light" %></li>
+        <% end %>
+      </ul>
+    </div>
+   </nav>
+</header>

@@ -1,0 +1,59 @@
+<div class="container">
+  <h3 class="bg-light text-center mt-4 w-50"><%= @customer.full_name %>さんの会員情報編集</h3>
+  <div class="row my-3">
+    <div class="col-sm-8">
+      <table class="table table-borderless">
+        <%= form_with model: @customer, local: true do |f| %>
+        <thead>
+          <tr>
+            <th class="col-2"></th>
+            <th class="col-3"></th>
+            <th class="col-3"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>会員ID</td>
+            <td colspan="2"><%= customer.id %></td>
+          </tr>
+          <tr>
+            <td>氏名</td>
+            <td><%= f.text_field :last_name %></td>
+            <td><%= f.text_field :first_name %></td>
+          </tr>
+          <tr>
+            <td>フリガナ</td>
+            <td><%= f.text_field :last_name_kana %></td>
+            <td><%= f.text_field :first_name_kana %></td>
+          </tr>
+          <tr>
+            <td>郵便番号</td>
+            <td colspan="2"><%= f.text_field :postcode %></td>
+          </tr>
+          <tr>
+            <td>住所</td>
+            <td colspan="2"><%= f.text_field :address, class: "col-12" %></td>
+          </tr>
+          <tr>
+          <tr>
+            <td>電話番号</td>
+            <td colspan="2"><%= f.text_field :phone_number %></td>
+          </tr>
+          <tr>
+            <td>メールアドレス</td>
+            <td colspan="2"><%= f.text_field :email %></td>
+          </tr>
+            <td>会員ステータス</td>
+            <td colspan="2"><%= f.radio_button :is_active, true %><%= f.label :is_active, "有効", value: :true, class: "text-success font-weight-bold mr-3" %>
+                <%= f.radio_button :is_active, false %><%= f.label :is_active, "退会済み", value: :false, class: "text-muted font-weight-bold" %>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="3"><%= f.submit "更新", class: "btn btn-info" %></td>
+          </tr>
+        </tbody>
+        <% end %>
+      </table>
+    </div>
+  </div>
+</div>

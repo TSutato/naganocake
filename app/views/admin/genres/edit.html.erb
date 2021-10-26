@@ -1,0 +1,9 @@
+<div class="container">
+  <h3 class="col-md-4 offset-1 bg-light text-center mt-2">ジャンル編集</h3>
+
+  <div class="row ml-5">
+    <div class="col-sm-10 my-5">
+      <%= render "form", genre: @genre, url: admin_genre_path(@genre), submit: '更新' %>
+    </div>
+  </div>
+</div>

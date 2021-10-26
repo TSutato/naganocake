@@ -1,0 +1,9 @@
+<div class="container">
+  <h3 class="bg-light text-center mt-2">会員一覧</h3>
+  <div class="row my-4">
+    <div class="offset-sm-1 col-sm-10">
+      <%= render 'index', customers: @customers %>
+    </div>
+     <%= paginate @customers %>
+  </div>
+</div>
