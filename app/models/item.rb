@@ -9,10 +9,11 @@ class Item < ApplicationRecord
   validates :price, presence: true, numericality: {only_integer: true, greater_than_or_equal_to: 0 }
   attachment :image_id
   
-  # 税込価格の表記
-  def add_tax_price
-    (self.price * 1.10).round
-  end
+
+## 消費税を求めるメソッド
+ def with_tax_price
+  (price * 1.1).floor
+ end
   
   def self.item_search(keyword)
     Item.where('name LIKE ?', "%#{keyword}%")

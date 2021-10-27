@@ -2,7 +2,7 @@
   <div class="row no-gutters">
     <div class="col-sm-8 mx-2 mx-auto shadow-sm rounded px-0 my-5">
       <h3 class="col-sm-5 offset-1 bg-light text-center mt-2"><%= @item.name %>の編集</h3>
-      <%= render "form", item: @items, url: admin_items_path, submit: '変更を保存' %>
+      <%= render "form", item: @items, url: admin_items_path(@items), submit: '変更を保存' %>
     </div>
   </div>
 </div>

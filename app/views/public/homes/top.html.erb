@@ -1,0 +1,56 @@
+<div class="container-fluid">
+  <div class="row my-3">
+    <div class="col-sm-3">
+      <table class="table table-borderless border table-sm text-center w-50 offset-sm-2">
+        <thead class="table-active">
+          <tr>
+            <th>ジャンル検索</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @genres.each do |genre| %>
+            <tr>
+              <td><%= link_to genre.name, items_path(genre_id: genre) %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-sm-9">
+      <div class="jumbotron mt-4 text-center">
+        <p>
+          <strong>ようこそ、ながのCAKEへ！</strong><br>
+          このサイトは、ケーキ販売のECサイトとなります。<br>
+          会員でない方も商品の閲覧はできますが、<br>
+          購入には会員登録が必要となります。
+        </p>
+      </div>
+      <h6 class="font-weight-bold">新着商品</h6>
+      <div class="row">
+        <% @items.last(4).each do |item| %>
+          <div class="col-md-3 mb-2 card-deck w-75">
+            <div class="card">
+              <div class="card-img">
+                <%= link_to item_path(item.id) do %>
+                  <%= attachment_image_tag item, :image, class: "w-100", height: "200", fallback: "no-image.png" %>
+                <% end %>
+              </div>
+              <div class="card-body pl-3">
+                <p><strong><%= item.name %></strong></p>
+                <p>
+                  <%= item.add_tax_price.to_s(:delimited) %> 円
+                  <% if item.is_active %>
+                    <span class="text-success">販売中</span>
+                  <% else %>
+                    <span class="text-muted">売り切れ</span>
+                  <% end %>
+                </p>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      <%= link_to "全ての商品を見る>>", items_path, class: "float-right mr-2 my-2" %>
+    </div>
+  </div>
+</div>
