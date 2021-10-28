@@ -1,0 +1,39 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <h3 class="bg-light text-center my-5 w-25">会員情報編集</h3>
+      <%= form_with model: @customer, url: customers_path, local: true do |f| %>
+        <div class="field">
+          <%= f.label :"氏名", class: "col-3" %>
+          <%= f.text_field :last_name, autofocus: true, class: "col-3 mr-2" %>
+          <%= f.text_field :first_name, autofocus: true, class: "col-3" %>
+        </div>
+        <div class="field">
+          <%= f.label :"フリガナ", class: "col-3" %>
+          <%= f.text_field :last_name_kana, autofocus: true, class: "col-3 mr-2" %>
+          <%= f.text_field :first_name_kana, autofocus: true, class: "col-3" %>
+        </div>
+        <div class="field">
+          <%= f.label :"郵便番号(ハイフンなし)", class: "col-3" %>
+          <%= f.text_field :postal_code, autofocus: true, class: "col-3" %>
+        </div>
+        <div class="field">
+          <%= f.label :"住所", class: "col-3" %>
+          <%= f.text_field :address, autofocus: true, class: "col-3" %>
+        </div>
+        <div class="field">
+          <%= f.label :"電話番号(ハイフンなし)", class: "col-3" %>
+          <%= f.text_field :telephone_number, autofocus: true, class: "col-3" %>
+        </div>
+        <div class="field">
+          <%= f.label :"メールアドレス", class: "col-3" %>
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "example@example.com", class: "col-3" %>
+        </div>
+        <div class="actions offset-sm-3 mt-3">
+          <%= f.submit :"編集内容を保存", class: "btn btn-success btn-sm col-3 mr-2" %>
+          <%= link_to "退会する", customers_unsubscribe_path, class: "btn btn-danger btn-sm col-3" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -19,7 +19,6 @@ Rails.application.routes.draw do
     get "customers/my_page" => "customers#show", as: "mypage"
     get 'customers/edit' => 'customers#edit', as: 'edit'
     patch 'customers/' => 'customers#update', as: 'customers'
-    put 'customers/information' => 'customers#update'
     get "customers/unsubscribe" => "customers#unsubscribe"
     get "orders/complete" => "orders#complete", as: "complete"
     post "orders/confirm" => "orders#confirm"
