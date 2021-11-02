@@ -1,5 +1,4 @@
-<%= form_with model: item: @items, url: admin_items_path, local:true do |f| %>
-
+  <%= form_with model: item ,url: admin_items_path , method: :POST , local:true do |f| %>
   <div class="form-group">
     <%= f.label :"商品画像", class: "col-sm-3 control-label ml-5" %>
     <%= f.attachment_field :image, class: "image" %>
@@ -27,7 +26,7 @@
     <%= f.radio_button :is_active, false, class: "ml-3" %>
     <%= f.label :is_active, "販売停止中", value: :false %>
   </div>
-  <div class="form-group text-center">
-    <%= f.submit submit, class: "btn btn-info my-2" %>
-  </div>
-<% end %>
+   <div class="form-group text-center">
+   <%= f.submit "新規登録", class: "btn btn-info my-2" %>
+   </div>
+   <%end%>

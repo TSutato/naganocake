@@ -1,16 +1,11 @@
 Rails.application.routes.draw do
   
-  devise_for :customers, controllers: {
-    sessions: 'public/sessions',
-    pusswords: 'public/passwords',
-    registrations: 'public/registrations'
-  }
-
+  
 
   devise_for :admins, controllers: {
-    sessions:    'admins/sessions',
-    passwords:     'admins/passwords',
-    registrations: 'admins/registrations'
+    sessions:    'admin/sessions',
+    passwords:     'admin/passwords',
+    registrations: 'admin/registrations'
   }
   
    scope module: :public do
@@ -25,14 +20,20 @@ Rails.application.routes.draw do
     get "orders/confirm" => "orders#error"
     patch "customers/withdraw" => "customers#withdraw"
     delete "cart_items/destroy_all" => "cart_items#destroy_all"
-    resources :items, only: [:index, :show] do
+    resources :items, only: [:index, :show] 
     resources :cart_items, only: [:create, :update, :destroy]
-    end
     resources :cart_items, only: [:index]
     resources :orders, only: [:new, :create, :index, :show]
     resources :addresses, only: [:index, :create, :edit, :update, :destroy]
     get "search" => "searches#search"
   end
+  
+  devise_for :customers, controllers: {
+    sessions: 'public/sessions',
+    passwords: 'public/passwords',
+    registrations: 'public/registrations'
+  }
+
   
     namespace :admin do
     

@@ -38,7 +38,7 @@
               <div class="card-body pl-3">
                 <p><strong><%= item.name %></strong></p>
                 <p>
-                  <%= item.add_tax_price.to_s(:delimited) %> 円
+                  <%= item.with_tax_price.to_s(:delimited) %> 円
                   <% if item.is_active %>
                     <span class="text-success">販売中</span>
                   <% else %>

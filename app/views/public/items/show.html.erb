@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-4 mx-auto px-0 my-5">
-      <%= attachment_image_tag @item, :image, fallback: "no-image.png", class: "w-100" %>
+      <%= attachment_image_tag @item, :image, fallback: "no_image.png", class: "w-100" %>
     </div>
     <div class="col-sm-6 mx-auto px-0 my-5">
       <h4><%= @item.name %></h4>
@@ -12,14 +12,14 @@
       <% if customer_signed_in? %>
         <% cart_item = current_customer.has_in_cart(@item) %>
         <% if cart_item %>
-          <%= form_with model: @item, url: cart_item_path, local: true do |f| %>
+          <%= form_with model: @cart_item, url: cart_items_path, local: true do |f| %>
           <p><small>こちらの商品は既にカートに入っています</small></p>
             <%= f.hidden_field :item_id, value: @item.id %>
             <%= f.select :amount, [*(1..10)] %>
             <%= f.submit "数量変更", class: "btn btn-info btn-sm ml-3" %>
           <% end %>
         <% elsif @item.is_active? %>
-          <%= form_with model: @item, url: cart_item_path, local: true do |f| %>
+          <%= form_with model: @cart_item, url: cart_items_path, local: true do |f| %>
             <p><small>数量を選択して下さい</small></p>
             <%= f.hidden_field :item_id, value: @item.id %>
             <%= f.select :amount, [*(1..10)], { include_blank: '個数選択' } %>
@@ -29,7 +29,7 @@
           <p class="text-muted">こちらの商品は、現在販売停止中です。</p>
         <% end %>
       <% else %>
-        <p><strong>⚠購入するには<u>ログイン</u>が必要です。</strong></p>
+        <p><strong>⚠購入するには<u><%= link_to "ログイン", new_customer_session_path%></u>が必要です。</strong></p>
       <% end %>
 
     </div>

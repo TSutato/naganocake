@@ -11,7 +11,7 @@ class Public::CustomersController < ApplicationController
   end
 
   def update
-       @customer = Customer.find(params[:id])
+       @customer = current_customer
     if @customer.update(customer_params)
       redirect_to mypage_path, flash: {info: '会員情報を更新しました'}
     else
@@ -40,7 +40,7 @@ class Public::CustomersController < ApplicationController
   def reject_customer
     @customer = Customer.find_by(name: params[:customer][:name])
     if @customer
-      if @customer.valid_password?(params[:customer][:password]) && (@customer.is_deleted == false)
+      if @customer.valid_password?(params[:customer][:password]) && !@customer.is_valid
         flash[:notice] = "退会済みです。再度ご登録をしてご利用ください。"
         redirect_to new_customer_registration
       else

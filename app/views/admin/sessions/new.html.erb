@@ -3,7 +3,7 @@
     <div class="col-sm-12 my-5">
       <h3 class = "col-sm-4 offset-sm-1 mb-3 font-weight-bold bg-light ">管理者ログイン</h3>
 
-<%= form_with model: @admin, url: admin_session_path, local: true do |f| %>
+<%= form_with model: @admin, url: new_admin_session_path, local: true do |f| %>
   
         <div class="field">
           <%= f.label :email, "メールアドレス", class: "col-3" %>

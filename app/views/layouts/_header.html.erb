@@ -1,5 +1,5 @@
 <header class="sticky-top shadow-sm">
- <nav class="navbar navbar-expand-lg">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
     <a class="navbar-brand" href="/"><%= image_tag "logo.jpeg", size:"120" %></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -7,7 +7,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
   <ul class="navbar-nav ml-auto">
       <% if customer_signed_in? %>
-        <span class="text-center">Welcome to<strong><%= current_customer.full_name %> 様 !</strong></span>
+        <span class="text-light">Welcome to<strong><%= current_customer.full_name %> 様 !</strong></span>
       <% end %>
       <ul class="headline navbar-nav ml-auto">
         <% if admin_signed_in? %>

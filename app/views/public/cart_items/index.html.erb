@@ -23,6 +23,7 @@
             <tbody>
               <% @cart_items.each do |cart_item| %>
               <% item = cart_item.item %>
+              
               <tr>
                 <td>
                   <%= attachment_image_tag item, :image, fallback: "no-image.png", class: "w-25" %>
@@ -32,7 +33,8 @@
                   <%= item.with_tax_price.to_s(:delimited) %>
                 </td>
                 <td>
-                  <%= form_with model: @item, url: cart_items_path, local: true do |f| %>
+                  <%= form_with model: cart_item, url: cart_item_path(cart_item), local: true do |f| %>
+                    <%= f.hidden_field :item_id, value: cart_item.item.id %>
                     <%= f.select :amount, [*(1..10)], { include_blank: false } %>
                     <%= f.submit "変更", class: "btn btn-info btn-sm ml-3" %>
                   <% end %>
@@ -41,7 +43,7 @@
                   <%= cart_item.subtotal.to_s(:delimited) %>
                 </td>
                 <td>
-                  <%= link_to "削除", item_cart_item_path(cart_item.item_id, cart_item.id), method: :delete, class: "btn btn-danger btn-sm" %>
+                  <%= link_to "削除", cart_item_path(cart_item.item_id, cart_item.id), method: :delete, class: "btn btn-danger btn-sm" %>
                 </td>
               </tr>
               <% end %>

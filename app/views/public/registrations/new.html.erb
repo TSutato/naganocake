@@ -1,9 +1,11 @@
+      <h3 class = "col-sm-4 offset-sm-1 mb-3 font-weight-bold bg-light text-center">新規会員登録</h3>
+      <div>
+       <%= render "public/shared/error_messages", resource: resource %>
+      </div>
 <div class="container">
   <div class="row">
     <div class="col-sm-12 my-5">
-      <h3 class = "col-sm-4 offset-sm-1 mb-3 font-weight-bold bg-light text-center">新規会員登録</h3>
       <%= form_with model: @customer, url: customer_registration_path, id: 'new_customer', class: 'new_customer', local:true do |f| %>
-      <%= render "public/shared/error_messages", resource: resource %>
 
       <div class="field">
         <%= f.label :"名前", class: "col-3" %>
@@ -24,7 +26,7 @@
 
       <div class="field">
         <%= f.label :"郵便番号(ハイフンなし)", class: "col-3" %>
-        <%= f.text_field :postal_code, autofocus: true, autocomplete: "postcode", placeholder: "1500041", class: "col-3" %>
+        <%= f.text_field :postal_code, autofocus: true, autocomplete: "postal_code", placeholder: "1500041", class: "col-3" %>
       </div>
 
       <div class="field">
@@ -67,4 +69,4 @@
     </div>
   </div>
 </div>
->
+
