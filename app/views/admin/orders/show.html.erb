@@ -56,14 +56,14 @@
           </tr>
         </thead>
         <tbody>
-          <% @order_detail.each do |order_detail| %>
+          <% @order_details.each do |order_details| %>
           <tr>
-            <td><%= order_item.item.name %></td>
-            <td><%= order_item.price.to_s(:delimited) %></td>
-            <td><%= order_item.amount %></td>
-            <td><%= order_item.subtotal.to_s(:delimited) %></td>
+            <td><%= order_details.item.name %></td>
+            <td><%= order_details.price.to_s(:delimited) %></td>
+            <td><%= order_details.amount %></td>
+            <td><%= order_details.subtotal.to_s(:delimited) %></td>
             <td>
-              <%= form_with model: order_item, url: admin_order_order_detail_path(order_id: @order.id, id: order_detail.id), method: :patch, local: true do |f| %>
+              <%= form_with model: order_details, url: admin_order_order_detail_path(order_id: @order.id, id: order_details.id), method: :patch, local: true do |f| %>
                 <%= f.select :making_status, OrderDetail.making_statuses.keys %>
                 <%= f.submit "更新", class: "btn btn-sm btn-success" %>
               <% end %>
@@ -87,7 +87,7 @@
         </tr>
         <tr>
           <th>ご請求金額</th>
-          <td>¥ <strong><%= @order.total_price.to_s(:delimited) %></strong></td>
+          <td>¥ <strong><%= (800 + @order.order_details.sum(&:subtotal)).to_s(:delimited) %></strong></td>
         </tr>
       </table>
     </div>

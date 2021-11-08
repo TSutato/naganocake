@@ -3,7 +3,7 @@
   <div class="row my-3">
     <div class="col-sm-8">
       <table class="table table-borderless">
-        <%= form_with model: @customer, local: true do |f| %>
+        <%= form_with model: @customer, url: admin_customer_path,  local: true do |f| %>
         <thead>
           <tr>
             <th class="col-2"></th>
@@ -14,7 +14,7 @@
         <tbody>
           <tr>
             <td>会員ID</td>
-            <td colspan="2"><%= customer.id %></td>
+            <td colspan="2"><%= @customer.id %></td>
           </tr>
           <tr>
             <td>氏名</td>

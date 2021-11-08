@@ -2,7 +2,21 @@
   <h3 class="bg-light text-center mt-2">配送先編集</h3>
   <div class="row my-5">
     <div class="col-sm-9">
-      <%= render 'form', address: @address, url: address_path(@address), submit: '変更' %>
+      <%= form_with model: @address, url: address_path(@address),local:true do |f| %>
+        <div class="field">
+          <%= f.label :postal_code, "郵便番号(ハイフンなし)", class: "col-3" %>
+          <%= f.text_field :postal_code, placeholder: "1500041", class: "col-2" %>
+        </div>
+        <div class="field">
+          <%= f.label :address, "住所", class: "col-3" %>
+          <%= f.text_field :address, placeholder: "東京都渋谷区神南1丁目19-11パークウェースクエア24階", class: "col-6" %>
+        </div>
+        <div class="field">
+          <%= f.label :name, "宛名", class: "col-3" %>
+          <%= f.text_field :name, placeholder: "令和太郎", class: "col-3" %>
+          <%= f.submit '変更', class: "btn btn-primary btn-sm float-right mr-3" %>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>

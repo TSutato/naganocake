@@ -1,0 +1,34 @@
+<h1>検索結果一覧</h1>
+   <div class="col-sm-9">
+      <% if params[:genre_id] %>
+        <h3 class="bg-light text-center"><%= @genre.name %>の商品一覧(全 <%= @genre.items.count %> 件)</h3>
+      <% else %>
+        <h3 class="bg-light text-center">商品一覧(全 <%= @items.count %> 件)</h3>
+      <% end %>
+      <div class="row my-3 mx-auto">
+        <% if @items.empty? %>
+          <h5 class="my-3 mx-auto">該当する商品はありません</h5>
+        <% else %>
+          <% @items.each do |item| %>
+            <div class="col-md-3 col-sm-12 mb-4 card-deck">
+              <div class="card">
+                <div class="card-img">
+                  <%= link_to item_path(item.id) do %>
+                    <%= attachment_image_tag item, :image, class: "w-100", height: "200", fallback: "no-image.png" %>
+                  <% end %>
+                </div>
+                <div class="card-body pl-3">
+                  <p><strong><%= item.name %></strong></p>
+                  <p>
+                    <%= item.with_tax_price.to_s(:delimited) %> 円
+                    <% if item.is_active %>
+                      <span class="text-success">販売中</span>
+                    <% else %>
+                      <span class="text-muted">売り切れ</span>
+                    <% end %>
+                  </p>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        <% end %>

@@ -31,15 +31,11 @@ class Customer < ApplicationRecord
     cart_items.find_by(item_id: item.id)
   end
 
-  def self.customer_search(keyword)
-    Customer.where(['last_name LIKE ? OR first_name LIKE ? OR last_name_kana LIKE ? OR first_name_kana LIKE ?', "%#{keyword}%", "%#{keyword}%", "%#{keyword}%", "%#{keyword}%"])
-  end
 
-
-     # is_activeがfalseならtrueを返すようにしている
-    #def active_for_authentication?
-     #    super && (is_active == false)
-    #end
+     #退会済み(is_active==true)のユーザーを弾くための記載。
+    def active_for_authentication?
+         super && (is_active == true)
+    end
 
 
 end

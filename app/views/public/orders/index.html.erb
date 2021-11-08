@@ -21,16 +21,16 @@
                   <%= order.created_at.strftime('%Y/%m/%d') %>
                 </td>
                 <td>
-                  〒<%= order.address_postal_code %><br>
-                  <%= order.address_address %><br>
-                  <%= order.address_name %>
+                  〒<%= order.postal_code %><br>
+                  <%= order.address %><br>
+                  <%= order.name %>
                 </td>
                 <td>
                   <% order.order_details.each do |order_detail| %>
                     <%= order_detail.item.name %><br>
                   <% end %>
                 </td>
-                <td><%= order.total_price.to_s(:delimited) %></td>
+                <td><%= order.total_payment.to_s(:delimited) %></td>
                 <td><%= order.status %></td>
                 <td class="text-center">
                   <%= link_to "表示する", order_path(order.id), class: "btn btn-info btn-sm mr-2" %>

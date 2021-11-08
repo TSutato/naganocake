@@ -1,6 +1,5 @@
 class Public::OrdersController < ApplicationController
-  before_action :authenticate_customer!
-  before_action :ensure_cart_items, only: [:new, :confirm, :create]
+  before_action :authenticate_customer!, only: [:new, :confirm, :create]
 
   def new
     @order = Order.new
@@ -8,18 +7,20 @@ class Public::OrdersController < ApplicationController
 
   def confirm
     @order = Order.new(order_params)
+    @cart_items = current_customer.cart_items
     #自分の住所を選択された時
-    if params[:order][:select_address] == '0'    
+    if params[:order][:select_address] == '0'
       @order.get_shipping_info(current_customer)
     #登録済の住所を選択された時
     elsif params[:order][:select_address] == '1'
       @selected_address = current_customer.addresses.find(params[:order][:address_id])
       @order.get_shipping_info(@selected_address)
     # 新しいお届け先が選択された時
-    elsif params[:order][:select_address] == '2' && @order.address_address? && (@order.address_postal_code =~ /\A\d{7}\z/) && @order.address_name?
-      @order.address_address = params[:order][:address_address]
-      @order.address_postal_code = params[:order][:address_postal_code]
-      @order.address_name = params[:order][:address_name]
+    elsif params[:order][:select_address] == '2'
+    #↓本来は21~23行目の記載不要だが動きを把握するために反映。
+      @order.address = params[:order][:address]
+      @order.postal_code = params[:order][:postal_code]
+      @order.name = params[:order][:name]
     else
       flash[:warning] = '情報を正しく入力して下さい。'
       redirect_to new_order_path
@@ -31,13 +32,13 @@ class Public::OrdersController < ApplicationController
     @order = current_customer.orders.new(order_params)
     @order.shipping_cost = 800
     @cart_items = current_customer.cart_items.all
-    @order.total_price = @order.shipping_cost + @cart_items.sum(&:subtotal)
+    @order.total_payment = @order.shipping_cost + @cart_items.sum(&:subtotal)
     if @order.save
       @cart_items.each do |cart_item|
         @order_detail = @order.order_details.new
         @order_detail.item_id = cart_item.item_id
         @order_detail.amount = cart_item.amount
-        @order_detail.price = cart_item.item.add_tax_price
+        @order_detail.price = cart_item.item.with_tax_price
         @order_detail.save
       current_customer.cart_items.destroy_all
       end
@@ -46,9 +47,9 @@ class Public::OrdersController < ApplicationController
       render :new
     end
   end
-  
+
   def complete
-    
+
   end
 
 
@@ -57,7 +58,7 @@ class Public::OrdersController < ApplicationController
   end
 
   def show
-    @order = Order.find(params[:id])
+    @order = current_customer.orders.find(params[:id])
   end
 
   private
@@ -66,10 +67,5 @@ class Public::OrdersController < ApplicationController
     params.require(:order).permit(:name, :postal_code, :address, :payment_method)
   end
 
-  def ensure_cart_items
-    @cart_items = current_customer.cart_items.includes(:item)
-    if @cart_items.empty?
-      redirect_to items_path, flash: {danger: 'カートに商品を入れてください'}
-    end
-  end
+
 end

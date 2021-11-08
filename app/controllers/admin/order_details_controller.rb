@@ -2,10 +2,10 @@ class Admin::OrderDetailsController < ApplicationController
   before_action :authenticate_admin!
 
   def update
-    @order_details = OrderDetail.find(params[:id])
+    @order_detail = OrderDetail.find(params[:id])
     @order = @order_detail.order
     if @order.status != "入金待ち"
-      @order_detail.update(order_item_params)
+      @order_detail.update(order_detail_params)
       @order_detail.change_order_status
       redirect_to admin_order_path(@order), flash: {success: "製作ステータスを更新しました！"}
     else

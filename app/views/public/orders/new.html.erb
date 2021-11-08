@@ -25,14 +25,14 @@
             <br><%= current_customer.full_name %>
           </div>
         </div>
-        <%   if current_customer.deliveries.present? %>
+        <%   if current_customer.addresses.present? %>
           <div class="form_select_address mb-3">
             <div class="col-sm-4">
               <%= f.radio_button :select_address, 1 %>
               <%= f.label :select_address, "登録済住所から選択" %>
             </div>
             <div class="col-sm-8 ml-3">
-              <%= f.collection_select :delivery_id, current_customer.addresses, :id, :full_address %>
+              <%= f.collection_select :address_id, current_customer.addresses, :id, :full_address %>
             </div>
           </div>
         <% end %>
@@ -43,16 +43,16 @@
           </div>
           <div class="ml-3">
             <div class="field">
-              <%= f.label :address_postcode, "郵便番号(ハイフンなし)", class: "col-3" %>
-              <%= f.text_field :address_postal_code, placeholder: "0000000", class: "col-3" %>
+              <%= f.label :postal_code, "郵便番号(ハイフンなし)", class: "col-3" %>
+              <%= f.text_field :postal_code, placeholder: "0000000", class: "col-3" %>
             </div>
             <div class="field">
-              <%= f.label :address_address, "住所", class: "col-3" %>
-              <%= f.text_field :address_address, placeholder: "東京都渋谷区代々木神園町0-0", class: "col-4" %>
+              <%= f.label :address, "住所", class: "col-3" %>
+              <%= f.text_field :address, placeholder: "東京都渋谷区代々木神園町0-0", class: "col-4" %>
             </div>
             <div class="field">
-              <%= f.label :address_name, "宛名", class: "col-3" %>
-              <%= f.text_field :address_name, placeholder: "令和太郎", class: "col-4" %>
+              <%= f.label :name, "宛名", class: "col-3" %>
+              <%= f.text_field :name, placeholder: "令和太郎", class: "col-4" %>
             </div>
           </div>
         </div>
