@@ -2,7 +2,7 @@ class Admin::OrdersController < ApplicationController
   before_action :authenticate_admin!
 
   def index
-    @orders = Order.page(params[:page]).per(10)
+    @orders = Order.order(id: :desc).page(params[:page]).per(10) #order(id: :desc)と記載することで新しい注文を上から順に掲載していく。
   end
 
   def show

@@ -37,11 +37,10 @@ class Public::CustomersController < ApplicationController
 
    # 会員の論理削除のための記述。退会後は、同じアカウントでは利用できない。
   def reject_customer
-    @customer = Customer.find_by(name: params[:customer][:name])
+    @customer = Customer.find_by(name: params[:customer][:email])
     if @customer
       if @customer.active_password?(params[:customer][:password]) && !@customer.is_active
-        flash[:notice] = "退会済みです。再度ご登録をしてご利用ください。"
-        redirect_to new_customer_registration
+        redirect_to new_customer_registration ,flash: {notice: "退会済みです。再度ご登録をしてご利用ください。"}
       else
         flash[:notice] = "項目を入力してください"
       end
