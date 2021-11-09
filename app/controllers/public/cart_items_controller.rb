@@ -9,7 +9,7 @@ class Public::CartItemsController < ApplicationController
     if  current_customer.cart_items.find_by(item_id: params[:cart_item][:item_id]).present?
       #trueであればカート内にある同じ商品の個数を増やす。
       @cart_item = current_customer.cart_items.find_by(item_id: params[:cart_item][:item_id])
-      @new_amount = @cart_item.amount.to_i+ params[:cart_item][:amount].to_i
+      @new_amount = @cart_item.amount.to_i + params[:cart_item][:amount].to_i
       @cart_item.update(amount: @new_amount)
       redirect_to cart_items_path
     else
