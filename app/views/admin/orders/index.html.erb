@@ -22,9 +22,13 @@
               <td><%= order.status %></td>
             </tr>
           <% end %>
-          <%= paginate @orders %>
         </tbody>
       </table>
+       <div class="row">
+         <div class="mx-auto">
+           <%= paginate(@orders) %>
+         </div>
+       </div>
     </div>
   </div>
 </div>
